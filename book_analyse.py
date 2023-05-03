@@ -17,4 +17,9 @@ st.sidebar.markdown("""
 
 
 dashboard_url = "https://public.tableau.com/views/top30_16830926966980/1?:showVizHome=no&embed=true/language=ko-KR&:display_count=n&:origin=viz_share_link"
-st.components.v1.html(f'<iframe src="{dashboard_url}" width="2000" height="2000"></iframe>')
+components.html(
+  """
+  <iframe src="https://prod-apnortheast-a.online.tableau.com/t/informationvisualization/views/AccountTracking/AccountTracking?::embed=yes&:tabs=yes&:toolbar=yes&:origin=viz_share_link"
+    width="1600" height="2000">
+  </iframe>
+  ""
