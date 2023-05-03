@@ -20,6 +20,5 @@ dashboard_url = "https://public.tableau.com/views/top30_16830926966980/1?:showVi
 components.html(
   """
   <iframe src= "https://public.tableau.com/views/top30_16830926966980/1?:showVizHome=no&embed=true/language=ko-KR&:display_count=n&:origin=viz_share_link"
-    width="1600" height="2000">
-  </iframe>
+ components.html(html_temp, width=1130, height=700)
   ""
