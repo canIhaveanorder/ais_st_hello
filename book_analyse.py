@@ -1,62 +1,137 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib as plt
+import plotly.express as px
 
-st.header('도서분석')
-st.sidebar.title('도서분석')
+
+st.header('📖도서중심 분석')
+
 
 st.sidebar.markdown("""
-    ## 도서관련 분석
+    ## 출판사 분석
     - [part 1. 도서 분석](#part-1-book-analysis)
     - [part 2. 작가 분석](#part-2-author-analysis)
-    - [part 3. 출판년도 분석](#part-3-publisher-analysis)
+    - [part 3. 출판년도 분석](#part-3-year_publication-analysis)
+    - [part 4. 출판사 분석](#part-4-publisher-analysis)
+""")
+st.write('')
+st.write("""
+- 출판사나 도서 기업의 입장에서 도서 평점을 활용한 분석이다. 출판사/
+도서기업이 가지고 있는 고객 데이터와 평점 등을 통해 출판사/도서기업의 데이터가 고객의 평점에 어떠한 영향을 미치는지를 분석하여 고객의 선호도를 분석한다.
+""")
+st.write('')
+st.write('')
+
+
+js = "window.scrollTo(0, document.getElementById('part-1-age-analysis').offsetTop);"
+
+    
+st.markdown("<h3 id='part-1-age-analysis'>✅Part 1. 도서 분석</h3>", unsafe_allow_html=True)
+
+st.write('')
+st.write('')
+st.write("""
+- 예를들어 Harry Potter 단어가 포함된 단어를 찾으면 해당 정보를 아래와 같이 찾을 수 있음
+- 같은 책이라도 에디션에 따라 나뉘는 종류가 다르게 경우가 있다
+""")
+
+st.write("""
+##### ✔ 상위 10위 도서별 평점수
+- Wild Animus 책이 21번으로 가장 많은 평점이 달렸습니다.
+- 그 뒤로 Where the Heart Is (Oprah's Book Club (Paperback)), The Da Vinci Code, The Red Tent (Bestselling Backlist) 등이 다음 평점 수를 기록했다.
+""")
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 데이터 불러오기
+
+df_book = pd.read_csv('data/popbooks.csv')
+
+fig1, ax = plt.subplots(figsize=(10, 6))
+sns.barplot(x='N_ratings', y='Book-Title', data=df_book,palette='Set1')
+
+# x축 레이블 90도 회전
+ax.set_xticklabels(ax.get_xticklabels(), rotation=50)
+
+# 그래프 제목 추가
+ax.set_title('Top10 Books most read by users', fontsize=16)
+
+# 그래프 표시하기
+st.pyplot(fig1)
+
+st.write("""
+##### ✔ 상위 10위 도서별 평균 평점
+- The Vampire Lestat (Vampire Chronicles, Book II)이 8.6점으로 가장 높은 평점을 보인다.
+- 그 뒤로 The Secret Life of Bees, A Painted House, We Were the Mulvaneys 등이 7점이상의 높은 평점을 보였다.
+""")
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 데이터 불러오기
+
+df_avg = pd.read_csv('data/goodratingbooks.csv')
+
+fig3, ax = plt.subplots(figsize=(10, 6))
+sns.barplot(x='avg_rating', y='Book-Title', data=df_avg,palette='Set1')
+
+# x축 레이블 90도 회전
+ax.set_xticklabels(ax.get_xticklabels(), rotation=50)
+
+# 그래프 제목 추가
+ax.set_title('Top10 Books most read by users', fontsize=16)
+
+# 그래프 표시하기
+st.pyplot(fig3)
+
+st.write('')
+st.write('')
+js = "window.scrollTo(0, document.getElementById('part-2-location-analysis').offsetTop);"
+  
+st.markdown("<h3 id='part-2-author-analysis'>✅Part 2. 작가 분석</h3>", unsafe_allow_html=True)
+
+st.write("""
+- 같은 저자라도 J.K Rowling, Joanne K,Rowling, Joanne K.Rowling과 같이 다른 방식으로 표기가 되어있는 경우가 있다
+""")
+
+st.write("""
+##### ✔ 상위10위 작가별 평균 평점
+""")
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 데이터 불러오기
+
+df_author = pd.read_csv('data/goodratingbooks.csv')
+
+fig2, ax = plt.subplots(figsize=(10, 6))
+sns.barplot(x='avg_rating', y='Book-Author', data=df_author,palette='Set1')
+
+# x축 레이블 90도 회전
+ax.set_xticklabels(ax.get_xticklabels(), rotation=50)
+
+# 그래프 제목 추가
+ax.set_title('Top 10 Book of rating by author', fontsize=16)
+
+# 그래프 표시하기
+st.pyplot(fig2)
+
+
+js = "window.scrollTo(0, document.getElementById('part-3-user-analysis').offsetTop);"
+
+st.markdown("<h3 id='part-3-year_publication-analysi'>✅Part 3. 출판년도 분석</h3>", unsafe_allow_html=True)
+
+js = "window.scrollTo(0, document.getElementById('part-4-publisher-analysis').offsetTop);"
+
+st.markdown("<h3 id='part-3-year_publication-analysi'>✅Part 4. 출판사 분석</h3>", unsafe_allow_html=True)
 """)
 
 
 
 
-
-dashboard_url = "https://public.tableau.com/views/top30_16830926966980/1?:showVizHome=no&embed=true/language=ko-KR&:display_count=n&:origin=viz_share_link"
-
-    html_temp = """
-    <div class='tableauPlaceholder' id='viz1608299294117' style='position: relative'><noscript><a href='#'><img alt=' '
-                src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;To&#47;Top1YoutubeInfluencerinallCountries&#47;Dashboard1&#47;1_rss.png'
-                style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
-        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-        <param name='embed_code_version' value='3' />
-        <param name='site_root' value='' />
-        <param name='name' value='Top1YoutubeInfluencerinallCountries&#47;Dashboard1' />
-        <param name='tabs' value='no' />
-        <param name='toolbar' value='yes' />
-        <param name='static_image'
-            value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;To&#47;Top1YoutubeInfluencerinallCountries&#47;Dashboard1&#47;1.png' />
-        <param name='animate_transition' value='yes' />
-        <param name='display_static_image' value='yes' />
-        <param name='display_spinner' value='yes' />
-        <param name='display_overlay' value='yes' />
-        <param name='display_count' value='yes' />
-        <param name='language' value='en' /></object></div>
-<script type='text/javascript'>
-    var divElement = document.getElementById('viz1608299294117');
-    var vizElement = divElement.getElementsByTagName('object')[0];
-    if (divElement.offsetWidth > 800) {
-        vizElement.style.width = '1130px';
-        vizElement.style.height = '727px';
-    } else if (divElement.offsetWidth > 500) {
-        vizElement.style.width = '1130px';
-        vizElement.style.height = '727px';
-    } else {
-        vizElement.style.width = '100%';
-        vizElement.style.height = '1527px';
-    }
-    var scriptElement = document.createElement('script');
-    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-    vizElement.parentNode.insertBefore(scriptElement, vizElement);
-</script>
-    """
-    components.html(html_temp, width=1130, height=700)
-    st.markdown(f'Link to the public dashboard [here](https://public.tableau.com/views/Top1YoutubeInfluencerinallCountries/Dashboard1?:language=en&:display_count=y&:origin=viz_share_link)')
-    st.markdown(f"**Data source and information about data collect can be found on [AccreditedDebtRelief website](https://www.accrediteddebtrelief.com/blog/every-countrys-most-popular-youtuber/)**")
-
-    max_width_str = f"max-width: 1030px;"
-    st.markdown(f"""<style>.reportview-container .main .block-container{{{max_width_str}}}</style>""",unsafe_allow_html=True)
